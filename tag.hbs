@@ -1,0 +1,43 @@
+{{!< default}}
+
+{{#tag}}
+  <section class="px-4 bg-backgr-tone" data-tag>
+    <div class="max-w-xl mx-auto py-12 min-h-[30vh] flex flex-col gap-3 items-center justify-center text-center">
+      {{#if feature_image}}
+        <figure class="rounded-full h-full relative">
+          {{> image
+            image_type="tag"
+            image_class="object-cover w-20 h-20 rounded-full aspect-square"
+            image_url=feature_image
+            size_xs=true
+            size_s=true
+            size_m=true
+            sizes="(max-width: 600px) 100px, 160px"
+            loading="eager"
+          }}
+        </figure>
+      {{/if}}
+      <h1 class="font-semibold tracking-tight text-2xl md:text-3xl lg:text-4xl xl:text-5xl">{{name}}</h1>
+      {{#if description}}
+        <p class="font-light text-lg text-typogr-tone">{{description}}</p>
+      {{/if}}
+    </div>
+  </section>
+{{/tag}}
+
+{{!-- Post feed --}}
+<section class="px-4 mb-16" data-feed="tag">
+  <div class="max-w-container mx-auto pt-12">
+    <div class="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
+      {{#foreach posts}}
+        {{#has tag="blog"}}
+          {{> blog-card}}
+        {{else}}
+          {{> job-card}}
+        {{/has}}
+      {{/foreach}}
+    </div>
+
+    {{> pagination}}
+  </div>
+</section>

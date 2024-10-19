@@ -1,0 +1,25 @@
+## routes.yaml
+
+routes:
+  /:
+    template: index
+
+collections:
+  # jobs collection
+  /designs/:
+    permalink: /{slug}/
+    template: jobs
+    data: page.designs
+    filter: tags:-[blog]
+    # order: featured desc, published_at desc
+
+  # blog collection 
+  /blog/:
+    permalink: /{slug}/
+    template: blog
+    data: tag.blog
+    filter: tags:[blog]
+
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/
