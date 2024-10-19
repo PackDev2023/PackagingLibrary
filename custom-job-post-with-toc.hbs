@@ -1,0 +1,32 @@
+{{!< default}}
+
+{{#post}}
+  {{!-- Hero section --}}
+  {{> job-hero }}
+  
+  <section class="max-w-wide mx-auto flex flex-col gap-6 lg:flex-row" data-post-content>
+    {{!-- TOC --}}
+    {{> toc}}
+
+    {{!-- Content --}}
+    <article class="ghost-content prose md:prose-lg prose-theme lg:flex-1" data-no-overflow{{#unless access}} data-preview{{/unless}}>
+      {{content}}
+    </article>
+  </section>
+
+  {{!-- Comments --}}
+  {{!-- {{> comments}} --}}
+{{/post}}
+
+{{!-- Related jobs --}}
+{{#if post.primary_tag}}  
+  {{#match post.tags.length ">=" 2}}
+    {{> related-jobs
+      tag_slugs=(concat post.tags.[0].slug "," post.tags.[1].slug)
+    }}
+  {{else}}
+    {{> related-jobs
+      tag_slugs=post.tags.[0].slug
+    }}
+  {{/match}}
+{{/if}}

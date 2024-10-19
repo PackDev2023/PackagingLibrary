@@ -1,0 +1,36 @@
+{{!< default}}
+
+{{#page}}
+  {{!-- Hero section --}}
+  {{> page-hero}}
+
+  {{!-- Categories from page tags --}}
+  {{#if tags}}
+    <div class="px-4 py-12" data-categories="{{slug}}">
+      <div class="max-w-container mx-auto">
+        <ul class="grid sm:grid-cols-2 gap-4 md:gap-6 md:grid-cols-3 lg:grid-cols-4">
+          {{#foreach tags}}
+            {{!-- To get the post count --}}
+            {{#get "tags" filter="slug:{{slug}}" include="count.posts" limit="1"}}
+              {{#foreach tags}}
+                <li class="">
+                  {{> job-category
+                    show_description=true
+                    logo_class="size-12 object-cover aspect-1/1 rounded-theme"
+                  }}
+                </li>
+              {{/foreach}}
+            {{/get}}
+          {{/foreach}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
+  
+  {{!-- Content --}}
+  {{#if html}}
+    <article class="pt-4 ghost-content prose md:prose-lg prose-theme"{{#unless access}} data-preview{{/unless}}>
+      {{content}}
+    </article>
+  {{/if}}
+{{/page}}

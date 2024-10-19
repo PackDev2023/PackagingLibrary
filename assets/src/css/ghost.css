@@ -1,0 +1,202 @@
+/* -------------------------------------------------------------------------- */
+/* Ghost content layout */
+/* -------------------------------------------------------------------------- */
+.ghost-content {
+  --gap: max(2vmin,16px);
+  --main: min(var(--content-width,720px),100% - var(--gap) * 2);
+  --wide: minmax(0,calc((var(--wide-width, 1200px) - var(--content-width, 720px))/2));
+  --full: minmax(var(--gap),1fr);
+  display: grid;
+  grid-template-columns: [full-start] var(--full) [wide-start] var(--wide) [main-start] var(--main) [main-end] var(--wide) [wide-end] var(--full) [full-end];
+  max-width: none; 
+  margin-bottom: 4rem;
+  word-break: break-word;
+}
+
+.ghost-content > * { grid-column: main-start/main-end; }
+.ghost-content .kg-width-wide { grid-column: wide-start/wide-end; }
+.ghost-content .kg-width-full { grid-column: full-start/full-end; }
+.ghost-content .kg-width-regular { grid-column: main-start/main-end; }
+
+/* no overflow */
+.ghost-content[data-no-overflow] { max-width: 100%; }
+.ghost-content[data-no-overflow] .kg-width-wide { grid-column: main-start/main-end; }
+.ghost-content[data-no-overflow] .kg-width-full { grid-column: main-start/main-end; }
+
+
+/* -------------------------------------------------------------------------- */
+/* Spacing */
+/* -------------------------------------------------------------------------- */
+.ghost-content > *:not(h1,h2,h3,h4,h5,h6) { margin-bottom: 0; }
+.ghost-content blockquote { margin: 2rem 0 1rem; }
+.ghost-content hr { margin: 4rem 0; }
+.ghost-content p + ul,
+.ghost-content p + ol {
+  margin-top: 0.25em;
+}
+
+.ghost-content *:is(h1,h2,h3,h4,h5,h6) + div.kg-card,
+.ghost-content *:is(h1,h2,h3,h4,h5,h6) + figure.kg-card,
+.ghost-content *:is(h1,h2,h3,h4,h5,h6) + figure.kg-card.kg-bookmark-card {
+  margin-top: 0;
+}
+
+.ghost-content .kg-card { margin: 2rem 0 0; }
+.ghost-content figure.kg-card { margin: 3rem 0 1rem; }
+.ghost-content .kg-signup-card { margin: 3rem 0 0; }
+.ghost-content .kg-header-card { margin: 3rem 0 0; }
+.ghost-content figure.kg-card.kg-bookmark-card { margin: 2rem 0 0; }
+.ghost-content .kg-width-full + .kg-width-full { margin-top: 0; }
+
+
+/* -------------------------------------------------------------------------- */
+/* Link color */
+/* -------------------------------------------------------------------------- */
+.ghost-content a:not([class*="kg-"],[class*="btn"]) { 
+  text-decoration-thickness: 2px;
+}
+
+.ghost-content a:not([class*="kg-"],[class*="btn"]):hover {
+  color: var(--ghost-accent-color);
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Figcaption */
+/* -------------------------------------------------------------------------- */
+.ghost-content figure figcaption { 
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 0.75rem; 
+  opacity: 0.85;
+}
+
+.ghost-content figure figcaption p { margin: 0; }
+
+
+/* -------------------------------------------------------------------------- */
+/* Iframe and table */
+/* -------------------------------------------------------------------------- */
+.ghost-content iframe { max-width: 100%; }
+.ghost-content table { display: inline-block; overflow-x: scroll; }
+
+
+/* -------------------------------------------------------------------------- */
+/* All images in cards */
+/* -------------------------------------------------------------------------- */
+.kg-card img { margin: 0; } /* centering image card images */
+
+
+/* -------------------------------------------------------------------------- */
+/* Image card and gallery image position */
+/* -------------------------------------------------------------------------- */
+.kg-image-card, .kg-gallery-image { position: relative; }
+.kg-image-card img { margin: 0 auto; }
+
+
+/* -------------------------------------------------------------------------- */
+/* Blockquote alt */
+/* -------------------------------------------------------------------------- */
+.kg-blockquote-alt { 
+  border-left: 0; 
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Video card */
+/* -------------------------------------------------------------------------- */
+.kg-video-card video { margin: 0; }
+
+
+/* -------------------------------------------------------------------------- */
+/* Embed card */
+/* -------------------------------------------------------------------------- */
+.kg-embed-card .twitter-tweet { margin: 10px auto; }
+
+
+/* -------------------------------------------------------------------------- */
+/* Button card */
+/* -------------------------------------------------------------------------- */
+.ghost-content .kg-button-card a.kg-btn { 
+  border-radius: var(--radius); 
+  color: var(--color-brand-contrast);
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+.ghost-content .kg-button-card { margin-bottom: 1em; }
+
+
+/* -------------------------------------------------------------------------- */
+/* Signup card */
+/* -------------------------------------------------------------------------- */
+.kg-content-wide .kg-signup-card-content { 
+  max-width: var(--wide-width); 
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.kg-signup-card picture { margin: 0; }
+
+.ghost-content .kg-signup-card-input { height: 3rem; }
+.ghost-content .kg-signup-card-button { height: 3rem; }
+.ghost-content .kg-signup-card-disclaimer { margin: 0.5rem 0 0; }
+
+
+/* -------------------------------------------------------------------------- */
+/* Header card */
+/* -------------------------------------------------------------------------- */
+.kg-content-wide .kg-header-card-content { 
+  max-width: var(--wide-width); 
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.kg-header-card picture { margin: 0; }
+.ghost-content .kg-header-card.kg-v2 .kg-header-card-button { height: 3rem; }
+
+
+/* -------------------------------------------------------------------------- */
+/* Product card */
+/* -------------------------------------------------------------------------- */
+.ghost-content .kg-product-card .kg-product-card-description ol, 
+.ghost-content .kg-product-card .kg-product-card-description p, 
+.ghost-content .kg-product-card .kg-product-card-description ul {
+  opacity: 0.85;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Bookmark card */
+/* -------------------------------------------------------------------------- */
+.ghost-content .kg-bookmark-icon {
+  margin-right: 6px;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Content CTA / upgrade */
+/* -------------------------------------------------------------------------- */
+.ghost-content .gh-post-upgrade-cta { margin-top: 2rem; }
+
+.ghost-content .gh-post-upgrade-cta-content {
+  border-radius: var(--radius);
+  color: var(--color-brand-contrast);
+}
+
+.gh-post-upgrade-cta-content h2,
+.gh-post-upgrade-cta p a {
+  color: var(--color-brand-contrast)!important;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+  background-color: var(--color-brand-contrast)!important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* No margin top when kg-card is the first element
+/* -------------------------------------------------------------------------- */
+.ghost-content > .kg-card:first-child {
+  margin-top: 0;
+}
