@@ -1,0 +1,65 @@
+<section class="px-4 bg-backgr-tone" data-post-hero="blog">
+  <div class="max-w-container mx-auto {{#if feature_image}}py-12{{else}} py-16{{/if}} min-h-[30vh] flex items-center flex-col gap-4 md:gap-8 md:flex-row">
+
+    <div class="w-full flex-1 flex flex-col gap-4{{#unless feature_image}} max-w-content mx-auto{{/unless}}">
+      {{!-- Tag and date --}}
+      <div class="text-typogr-tone flex gap-2">
+        <time class="" datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time> 
+        {{#if reading_time}}
+          <span>·</span>
+          <span class="">{{reading_time minute=(t '1 min read') minutes=(t '% min read')}}</span>
+        {{/if}}
+      </div>
+
+      {{!-- Title --}}
+      <h1 class="font-semibold tracking-tight text-2xl md:text-3xl lg:text-4xl{{#unless feature_image}} xl:text-5xl{{/unless}}">
+        {{title}}
+      </h1>
+
+      {{!-- Excerpt --}}
+      {{#if custom_excerpt}}
+        <p class="text-typogr-tone text-lg md:text-xl font-light">{{custom_excerpt}}</p>
+      {{/if}}
+
+      <ul class="flex flex-wrap gap-2 text-typogr-tone text-sm md:text-base">
+        {{#foreach authors}}
+          <li class="flex items-center">
+            {{#unless @first}}<span class="mr-2 opacity-25 font-light text-xl">/</span>{{/unless}}
+            <a href="{{url}}" class="flex items-center gap-1.5 hover:text-brand">
+              {{> image
+                image_type="author"
+                image_class="lazyload size-6 md:size-7 object-cover rounded-full"
+                image_url=profile_image
+                image_alt=" "
+                size_xxs=true
+                size_xs=true
+                sizes="28px"
+              }}
+              <span>{{name}}</span>
+            </a>
+          </li>
+        {{/foreach}}
+      </ul>
+    </div>
+
+    {{!-- Feature image --}}
+    {{#if feature_image}}
+      <figure class="w-full flex-1 h-full relative rounded-theme">
+        {{> image
+          image_type="post"
+          image_class="w-full object-cover rounded-theme aspect-[16/9]"
+          image_url=feature_image
+          size_s=true
+          size_m=true
+          size_l=true
+          size_xl=true
+          sizes="(max-width: 600px) 480px, 720px"
+          loading="eager"
+        }}
+        {{!-- Figcaption --}}
+        {{#if feature_image_caption}}<figcaption class="mt-2 opacity-80 text-sm [&>a]:text-brand [&>a]:underline [&>a]:decoration-2 [&>a:hover]:text-brand">{{feature_image_caption}}</figcaption>{{/if}}
+      </figure>
+    {{/if}}
+
+  </div>
+</section>

@@ -1,0 +1,31 @@
+{{#match @page.show_title_and_feature_image}} 
+  <section class="px-4 bg-backgr-tone" data-page-hero>
+    <div class="{{#if feature_image}}max-w-container py-8{{else}}max-w-2xl py-16{{/if}} mx-auto min-h-[30vh] flex flex-col gap-4 md:gap-8 md:flex-row">
+      <div class="flex flex-1 flex-col gap-4 md:gap-6 justify-center{{#if feature_image}} items-start text-left{{else}} items-center text-center{{/if}}">
+        <h1 class="font-semibold tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl">{{title}}</h1>
+        {{#if custom_excerpt}}
+          <p class="font-light text-lg md:text-xl text-typogr-tone">{{custom_excerpt}}</p>
+        {{/if}}
+      </div>
+      {{#if feature_image}}
+        <figure class="flex-1 h-full w-full left-0 top-0">
+          {{> image
+            picture_class="flex h-full"
+            image_type="post"
+            image_class="w-full object-cover object-center rounded-theme"
+            image_url=feature_image
+            size_s=true
+            size_m=true
+            size_l=true
+            size_xl=true
+            sizes="(max-width: 600px) 480px, (max-width: 1080px) 940px, 1200px"
+            loading="eager"
+          }}
+          {{#if feature_image_caption}}
+            <figcaption class="mt-2 opacity-80 text-sm [&>a]:text-brand [&>a]:underline [&>a]:decoration-2 [&>a:hover]:text-brand">{{feature_image_caption}}</figcaption>
+          {{/if}}
+        </figure>
+      {{/if}}
+    </div>
+  </section>
+{{/match}}

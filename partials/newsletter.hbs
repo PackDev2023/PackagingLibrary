@@ -1,0 +1,23 @@
+{{#if @site.members_enabled}}
+  {{#unless @member}}
+    {{#if @custom.newsletter_headline}}
+      <section class="relative px-4 after:content-[''] after:absolute after:top-1/2 after:left-0 after:z-[-1] after:w-full after:h-1/2 after:bg-backgr-tone" data-newsletter>
+        <div class="max-w-container mx-auto">
+          <div class="rounded-theme-md bg-typogr px-8 py-16">
+            <div class="max-w-content-wide mx-auto flex flex-col md:flex-row md:items-center gap-8 lg:gap-24">
+              <span class="flex-2 max-w-lg text-backgr text-xl md:text-2xl lg:text-3xl font-medium" id="newsletter-input-label">
+                {{{@custom.newsletter_headline}}}
+              </span>
+              {{> subscribe-form
+                form_class="bg-backgr flex flex-wrap flex-1 rounded-theme-md bg-backgr p-1"
+                input_label="newsletter-input-label"
+                input_class="bg-backgr text-typogr flex-[2] py-2 rounded-theme border-none focus:ring-0"
+                button_class="flex-1 px-4 py-2 bg-brand text-brand-contrast font-medium rounded-theme md:px-6"
+              }}
+            </div>
+          </div>
+        </div>
+      </section>
+    {{/if}}
+  {{/unless}}
+{{/if}}

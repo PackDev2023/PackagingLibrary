@@ -1,0 +1,37 @@
+<div class="relative" x-data="{ colorSchemeMenuOpen: false }" x-init="$nextTick(() => { initColorScheme() })" data-select-color-scheme>
+  <div class="inline-flex overflow-hidden border border-border divide-x divide-border rounded-md">
+    <div class="inline-flex flex-1 items-center gap-x-2 rounded-l-md bg-backgr px-2.5 py-1.5 text-typogr text-xs font-medium [&>p+i]:hidden [&>p]:mr-4" data-selected-color-scheme>
+      {{> icon name="desktop" icon_class="stroke-[2.5] w-4 h-4"}}
+      <p class="">{{t "System"}}</p>
+    </div>
+    <button type="button" class="inline-flex items-center rounded-l-none rounded-r-md bg-backgr p-1.5 hover:bg-backgr-tone focus:outline-none focus:ring-2 focus:ring-offset-gray-50" 
+      aria-haspopup="listbox" aria-expanded="false" @click="colorSchemeMenuOpen = !colorSchemeMenuOpen; event.currentTarget.setAttribute('aria-expanded', colorSchemeMenuOpen)">
+      <span class="sr-only">{{t "Change color scheme"}}</span>
+      {{> icon name="chevron-down" icon_class="stroke-[2.5] w-4 h-4"}}
+    </button>
+  </div>
+
+  <ul class="absolute left-0 bottom-10 hidden z-10 mt-2 origin-top-left divide-y divide-border overflow-hidden rounded-md bg-backgr shadow-md ring-1 ring-border ring-opacity-5 focus:outline-none" 
+  tabindex="-1" role="listbox" aria-label="{{t "Change color scheme"}}" aria-activedescendant="system" :class="{ 'block': colorSchemeMenuOpen, 'hidden': !colorSchemeMenuOpen}">
+    <li class="text-typogr-tone font-medium flex gap-2 items-center cursor-pointer select-none px-2.5 py-2 text-xs hover:bg-backgr-tone focus:bg-backgr-tone" 
+      id="system" role="option" @click="colorSchemeMenuOpen = false;changeColorScheme('system')">
+      {{> icon name="desktop" icon_class="stroke-[2.5] w-4 h-4"}}
+      <p class="flex-1">{{t "System"}}</p>
+      {{> icon name="check" icon_class="stroke-[2.5] ml-4 w-4 h-4"}}
+    </li>
+
+    <li class="text-typogr-tone font-medium flex gap-2 items-center cursor-pointer select-none px-2.5 py-2 text-xs hover:bg-backgr-tone focus:bg-backgr-tone" 
+      id="light" role="option" @click="colorSchemeMenuOpen = false;changeColorScheme('light')">
+      {{> icon name="sun" icon_class="stroke-[2.5] w-4 h-4"}}
+      <p class="flex-1">{{t "Light"}}</p>
+      {{> icon name="check" icon_class="stroke-[2.5] ml-4 w-4 h-4"}}
+    </li>
+
+    <li class="text-typogr-tone font-medium flex gap-2 items-center cursor-pointer select-none px-2.5 py-2 text-xs hover:bg-backgr-tone focus:bg-backgr-tone" 
+      id="dark" role="option" @click="colorSchemeMenuOpen = false;changeColorScheme('dark')">
+      {{> icon name="moon" icon_class="stroke-[2.5] w-4 h-4"}}
+      <p class="flex-1">{{t "Dark"}}</p>
+      {{> icon name="check" icon_class="stroke-[2.5] ml-4 w-4 h-4"}}
+    </li>
+  </ul>
+</div>

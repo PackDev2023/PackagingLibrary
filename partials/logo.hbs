@@ -1,0 +1,34 @@
+{{!-- Dark logo --}}
+{{#if @custom.dark_theme_logo}}
+  {{> image
+    data_prop="data-logo='dark'"
+    picture_class=""
+    image_type="custom"
+    image_class="h-[var(--logo-h-mobile)] w-[var(--logo-w-mobile)] md:h-[var(--logo-h-desktop)] md:w-[var(--logo-w-desktop)]"
+    image_url=@custom.dark_theme_logo
+    size_xs=true
+    size_s=true
+    size_m=true
+    loading=loading
+    sizes="(max-width: 800px) 200px, 320px"
+    custom_alt=@site.title
+  }}
+{{/if}}
+{{#if @site.logo}}
+  {{!-- Site logo --}}
+  {{> image
+    data_prop="data-logo='default'"
+    picture_class=""
+    image_type="site"
+    image_class="h-[var(--logo-h-mobile)] w-[var(--logo-w-mobile)] md:h-[var(--logo-h-desktop)] md:w-[var(--logo-w-desktop)]"
+    image_url=@site.logo
+    size_xs=true
+    size_s=true
+    size_m=true
+    loading=loading
+    sizes="(max-width: 800px) 200px, 320px"
+  }}
+{{else}}
+  {{!-- Site Title --}}
+  <span class="text-typogr font-headings text-2xl md:text-3xl font-bold">{{@site.title}}</span>
+{{/if}}

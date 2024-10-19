@@ -1,0 +1,98 @@
+{{!-- Typography --}}
+{{#match @custom.font_headings "!=" "System"}}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{{else match @custom.font_headings "!=" "System"}}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{{/match}}
+
+{{!-- Headings --}}
+{{#match @custom.font_headings "DM Sans"}}
+  {{> font-loader id="DM+Sans" weights="300..800" font_headings="DM Sans" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_headings "Lexend"}}
+  {{> font-loader id="Lexend" weights="300..800" font_headings="Lexend" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_headings "Hanken Grotesk"}}
+  {{> font-loader id="Hanken+Grotesk" weights="300..800" font_headings="Hanken Grotesk" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_headings "Plus Jakarta Sans"}}
+  {{> font-loader id="Plus+Jakarta+Sans" weights="300..800" font_headings="Plus Jakarta Sans" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_headings "Domine"}}
+  {{> font-loader id="Domine" weights="400..700" font_headings="Domine" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_headings "Recursive"}}
+  {{> font-loader id="Recursive" weights="300..800" font_headings="Recursive" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_headings "Cairo"}}
+  {{> font-loader id="Cairo" weights="300..800" font_headings="Cairo" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_headings "Mulish"}}
+  {{> font-loader id="Mulish" weights="300..800" font_headings="Mulish" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_headings "Inter"}}
+  {{> font-loader id="Inter" weights="300..800" font_headings="Inter" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_headings "Space Mono"}}
+  {{> font-loader id="Space+Mono" weights="400;700" font_headings="Space Mono" fallback="monospace"}}
+{{/match}}
+
+{{#match @custom.font_headings "Kalnia"}}
+  {{> font-loader id="Kalnia" weights="300..700" font_headings="Kalnia" fallback="serif"}}
+{{/match}}
+
+{{#match @custom.font_headings "Source Serif 4"}}
+  {{> font-loader id="Source+Serif+4" weights="300..800" font_headings="Source Serif 4" fallback="serif"}}
+{{/match}}
+
+{{!-- Body --}}
+{{#match @custom.font_body "DM Sans"}}
+  {{> font-loader id="DM+Sans" weights="300..800" font_body="DM Sans" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_body "Lexend"}}
+  {{> font-loader id="Lexend" weights="300..800" font_body="Lexend" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_body "Hanken Grotesk"}}
+  {{> font-loader id="Hanken+Grotesk" weights="300..800" font_body="Hanken Grotesk" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_body "Plus Jakarta Sans"}}
+  {{> font-loader id="Plus+Jakarta+Sans" weights="300..800" font_body="Plus Jakarta Sans" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_body "Domine"}}
+  {{> font-loader id="Domine" weights="400..700" font_body="Domine" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_body "Recursive"}}
+  {{> font-loader id="Recursive" weights="300..800" font_body="Recursive" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_body "Cairo"}}
+  {{> font-loader id="Cairo" weights="300..800" font_body="Cairo" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_body "Mulish"}}
+  {{> font-loader id="Mulish" weights="300..800" font_body="Mulish" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_body "Inter"}}
+  {{> font-loader id="Inter" weights="300..800" font_body="Inter" fallback="sans-serif"}}
+{{/match}}
+
+{{#match @custom.font_body "Space Mono"}}
+  {{> font-loader id="Space+Mono" weights="400;700" font_body="Space Mono" fallback="monospace"}}
+{{/match}}

@@ -1,0 +1,100 @@
+<section class="{{#match @custom.hero_cover_image_style "background-full"}}relative bg-backgr-tone {{/match}}px-4 mb-16" data-hero>
+  <div class="{{#match @custom.hero_cover_image_style "background"}}relative {{/match}}min-h-[50vh] max-w-container mx-auto flex flex-col items-center gap-6 lg:gap-8{{#match @custom.hero_cover_image_style "!=" "bottom"}} md:flex-row{{/match}}">
+    <div class="z-[2] py-8 max-w-xl flex-1 flex flex-col gap-4 md:gap-6 items-start justify-center{{#match @custom.hero_cover_image_style "!=" "right"}} max-w-2xl mx-auto items-center text-center{{/match}}" data-hero-content>
+      {{!-- Headline --}}
+      <h1 class="font-semibold tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl{{#match @custom.hero_cover_image_style "background"}} text-white{{/match }}{{#match @custom.hero_cover_image_style "background-full"}} text-white{{/match}}"
+        data-hero-headline
+      >
+        {{#if @custom.hero_headline}}{{{@custom.hero_headline}}}{{else}}{{@site.title}}{{/if}}
+      </h1>
+
+      {{!-- Subheading --}}
+      <p id="hero-input-label" class="text-typogr-tone text-lg md:text-xl font-light{{#match @custom.hero_cover_image_style "background"}} text-white{{/match }}{{#match @custom.hero_cover_image_style "background-full"}} text-white{{/match}}">
+        {{#if @custom.hero_subheading}}{{{@custom.hero_subheading}}}{{else}}{{@site.description}}{{/if}}
+      </p>
+
+      {{!-- Action --}}
+      {{#match @custom.hero_action "cta"}}
+        {{#if @custom.cta_text}}
+          <a href="{{@custom.cta_link}}" 
+            class="bg-brand text-base md:text-lg font-medium text-brand-contrast px-4 py-2 rounded-theme md:px-5 hover:brightness-110">
+            <span>{{@custom.cta_text}}</span>
+          </a>
+        {{/if}}
+      {{/match}}
+
+      {{#match @custom.hero_action "subscribe-form"}}
+        {{#unless @member}}
+          {{> subscribe-form
+            form_class="w-full max-w-md bg-backgr border border-border flex flex-wrap rounded-theme-md bg-backgr p-1 transition-all
+                        focus-within:border-brand focus-within:ring-4 focus-within:ring-brand focus-within:ring-opacity-20"
+            input_class="bg-backgr text-typogr flex-[2] py-2 rounded-theme border-none focus:ring-0"
+            button_class="flex-1 px-4 py-2 bg-brand text-brand-contrast font-medium rounded-theme md:px-6"
+          }}
+        {{/unless}}
+      {{/match}}
+
+      {{#match @custom.hero_action "search"}}
+        <button data-ghost-search
+          class="flex gap-1.5 items-center bg-brand text-base md:text-lg font-medium text-brand-contrast px-4 py-2 rounded-theme md:px-5 hover:brightness-110">
+          {{> icon name="search" icon_class="w-5 h-5 stroke-2 md:stroke-[2.5]"}}
+          <span>{{t "Search"}}</span>
+        </button>
+      {{/match}}
+  
+      {{#match @custom.hero_action "tags"}}
+        {{#if @custom.featured_job_categories}}
+          {{#get "tags" filter="slug:[{{@custom.featured_job_categories}}]" limit="all"}}
+            {{#if tags}}
+              <ul class="flex flex-wrap gap-2 text-sm{{#match @custom.hero_cover_image_style "!=" "right"}} justify-center{{/match}}">
+                {{#foreach tags}}
+                  <li>
+                    <a href="{{url}}" class="block rounded-theme text-typogr-tone font-medium border border-border px-3 py-1 hover:border-typogr-tone hover:bg-backgr-tone">{{name}}</a>
+                  </li>
+                {{/foreach}}
+              </ul>
+            {{/if}}
+          {{/get}}
+        {{/if}}
+      {{/match}}
+    </div>
+    
+    {{#match @custom.hero_cover_image_style "!=" "hidden"}}
+      {{#if @site.cover_image}}
+        <figure class="flex-1 h-full w-full rounded-theme-md overflow-hidden left-0 top-0{{#match @custom.hero_cover_image_style "background"}} absolute z-[1]{{/match }}{{#match @custom.hero_cover_image_style "background-full"}} absolute z-[1] !rounded-none{{/match }}" 
+          data-hero-img="{{@custom.hero_cover_image_style}}"
+        >
+          {{#match @custom.hero_cover_image_style "right"}}
+            {{> image
+              picture_class="flex h-full"
+              image_type="site"
+              image_class="w-full object-cover object-center"
+              image_url=@site.cover_image
+              size_s=true
+              size_m=true
+              size_l=true
+              size_xl=true
+              size_xxl=true
+              sizes="(max-width: 360px) 300px, (max-width: 640px) 600px, 720px"
+              loading="eager"
+            }}
+          {{else}}
+            {{> image
+              picture_class="flex h-full"
+              image_type="site"
+              image_class="w-full object-cover object-center"
+              image_url=@site.cover_image
+              size_s=true
+              size_m=true
+              size_l=true
+              size_xl=true
+              size_xxl=true
+              sizes="(max-width: 360px) 300px, (max-width: 640px) 600px, (max-width: 1080px) 940px, (max-width: 1400px) 1200px, 1600px"
+              loading="eager"
+            }}
+          {{/match}}
+        </figure>
+      {{/if}}
+    {{/match}}
+  </div>
+</section>

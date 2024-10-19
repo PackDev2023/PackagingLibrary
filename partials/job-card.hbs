@@ -1,0 +1,44 @@
+<article class="{{post_class}} relative flex border border-border rounded-theme p-5 md:p-6 transition hover:shadow-lg flex-col gap-3{{#if featured}} {{featured_class}}{{/if}}{{#if card_class}} {{card_class}}{{/if}}" 
+  data-job-card="" {{#if featured}} data-featured{{/if}}>
+  {{#if feature_image}}
+    {{#link href=url class="self-start"}}
+      <figure class="rounded-full">
+        {{> image
+          image_type="post"
+          image_class="rounded-full transition-all aspect-1/1 size-14"
+          image_url=feature_image
+          size_xs=true
+          size_s=true
+          sizes="64px"
+          loading="lazy"
+        }}
+      </figure>
+    {{/link}}
+  {{/if}}
+
+  <time class="{{#unless feature_image}}hidden{{/unless}} flex gap-1 items-center text-sm text-typogr-tone font-semibold absolute right-5 md:right-6 top-5 md:top-6{{#if date_class}} {{date_class}}{{/if}}" datetime="{{date format="YYYY-MM-DD"}}">
+    {{date timeago=""}}
+  </time> 
+  
+  <div class="flex flex-1 flex-col gap-2">
+    <h3 class="text-base md:text-lg leading-tight md:leading-tight font-semibold lg:text-xl" data-job-card-title>
+      <a href="{{url}}" class="hover:text-brand">{{title}}</a>
+    </h3>
+    
+    {{#if custom_excerpt}}
+      <p class="flex-1 max-w-xl text-sm md:text-base text-typogr-tone font-light leading-snug">{{custom_excerpt}}</p>
+    {{else}}
+      <span class="flex-1"></span>
+    {{/if}}
+    
+    {{#if tags}}
+      <ul class="mt-2 flex flex-wrap gap-1.5 text-typogr-tone text-sm font-medium">
+        {{#foreach tags limit=@custom.job_card_tags_limit}}
+          <li class="">
+            <a href="{{url}}" class="block px-2 py-0.5 border border-border rounded-theme-sm hover:bg-backgr-tone hover:text-accent">{{name}}</a>
+          </li>
+        {{/foreach}}
+      </ul>
+    {{/if}}
+  </div>
+</article>

@@ -1,0 +1,16 @@
+{{#if font_headings}}
+  {{#if id}}
+    <link rel="preload stylesheet" href="https://fonts.googleapis.com/css2?family={{id}}:wght@{{weights}}&display=swap" 
+          as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin>
+  {{/if}}
+  <style>body { --font-headings: '{{font_headings}}', {{fallback}}; }</style>
+{{/if}}
+{{#if font_body}}
+  {{#match @custom.font_headings "!=" @custom.font_body}}
+    {{#if id}}
+      <link rel="preload stylesheet" href="https://fonts.googleapis.com/css2?family={{id}}:wght@{{weights}}&display=swap" 
+            as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin>
+    {{/if}}
+  {{/match}}
+  <style>body { --font-body: '{{font_body}}', {{fallback}}; }</style>
+{{/if}}

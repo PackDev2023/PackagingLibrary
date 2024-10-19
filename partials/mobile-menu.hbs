@@ -1,0 +1,64 @@
+{{!-- Menu --}}
+<div class="absolute shadow-xl z-[100] top-[68px] md:top-[96px] w-full bg-backgr text-typogr-tone pt-4 border-t border-border lg:hidden" 
+  :class="menuOpen ? 'block' : 'hidden'" data-menu id="menu"
+> 
+  <div class="px-4">
+    <nav class="" data-nav="mobile">
+      {{navigation 
+        ul_class="flex flex-col gap-1"
+        li_class="flex relative"
+        a_class="flex py-0.5 rounded-theme hover:text-brand"
+      }}
+    </nav>
+  </div>
+  
+  <div class="p-4 mt-4 flex gap-2 border-y border-border">
+    {{!-- Search --}}
+    <button class="font-medium flex gap-2 px-3 rounded-theme items-center justify-center border border-border text-sm hover:bg-backgr-tone" data-ghost-search title="{{t "Search"}}" aria-label="{{t "Search"}}">
+      <span>{{t "Search"}}</span>
+      {{> icon name="search" icon_class="w-4 h-4 stroke-2"}}
+    </button>
+
+    {{!-- Color scheme dropdown --}}
+    {{!-- {{> select-color-scheme}} --}}
+
+    <span class="flex-1"></span>
+
+    {{!-- Action --}}
+    {{!-- Header action: CTA --}}
+    {{#match @custom.header_action "cta"}}
+      {{#if @custom.cta_text}}
+        <a href="{{@custom.cta_link}}" 
+          class="bg-brand text-sm md:text-base font-medium text-brand-contrast px-4 py-2 rounded-theme md:px-5 hover:brightness-110">
+          <span>{{@custom.cta_text}}</span>
+        </a>
+      {{/if}}
+    {{/match}}
+
+    {{!-- Header action: Sign in/Sign up --}}
+    {{#match @custom.header_action "signin-signup"}}
+      {{#if @site.members_enabled}}
+        {{#unless @member}}
+          <a href="/signin/" data-portal="signin"
+            class="text-sm font-medium md:text-base mr-1 px-3 py-1.5 rounded-theme md:px-4 border border-border hover:bg-backgr-tone">
+            <span>{{t "Sign in"}}</span>
+          </a>
+          <a href="/signup/" data-portal="signup"
+            class="text-sm md:text-base font-medium bg-brand text-brand-contrast px-4 py-1.5 rounded-theme md:px-5 hover:brightness-110">
+            <span>{{t "Sign up"}}</span>
+          </a>
+        {{/unless}}
+      {{/if}}
+    {{/match}}
+
+    {{!-- Header action: Subscribe --}}
+    {{#match @custom.header_action "subscribe"}}
+      {{#unless @member}}
+        <a href="/subscribe/" data-portal="subscribe"
+          class="bg-brand text-sm md:text-base font-medium text-brand-contrast px-4 py-2 rounded-theme md:px-5 hover:brightness-110">
+          <span>{{t "Subscribe"}}</span>
+        </a>
+      {{/unless}}
+    {{/match}}
+  </div>
+</div>

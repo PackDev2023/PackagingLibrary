@@ -1,0 +1,103 @@
+<footer class="bg-backgr-tone px-4" data-footer>
+  <div class="max-w-container mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-6 gap-4 py-6 md:gap-8 md:py-8 lg:py-12">
+      {{!-- Brand --}}
+      <div class="flex flex-col items-start gap-3 col-span-2 md:col-span-1 lg:col-span-2" data-footer-brand>
+        <a href="{{@site.url}}" data-brand>
+          {{> logo loading="lazy"}}
+        </a>
+
+        {{!-- Description --}}
+        <p class="text-typogr-tone">{{@site.description}}</p>
+
+        {{!-- Social media --}}
+        <nav class="flex items-center gap-2 text-typogr-tone text-base" data-footer-social>
+          {{> social-links 
+            item_class="p-2 border border-border bg-backgr rounded-theme hover:bg-brand hover:text-brand-contrast hover:border-transparent"
+            icon_class="w-4 h-4 stroke-2"
+            text_class="sr-only"
+          }}
+        </nav>
+      </div>
+
+      {{!-- Primary Navigation --}}
+      <div class="flex flex-col gap-2 mt-4" data-footer-nav="primary">
+        <span class="font-semibold">{{@site.title}}</span>
+        <nav class="">
+          {{navigation 
+            ul_class="flex flex-col items-start gap-2 text-typogr-tone text-sm"
+            li_class="flex flex-col relative"
+            a_class="flex hover:text-brand"
+          }}
+        </nav>
+      </div>
+
+      {{!-- Secondary Navigation --}}
+      <div class="flex flex-col gap-2 mt-4" data-footer-nav="secondary">
+        <span class="font-semibold">{{t "About"}}</span>
+        <nav class="">
+          {{#if @site.secondary_navigation}}
+            {{navigation 
+              type="secondary"
+              ul_class="flex flex-col items-start gap-2 text-typogr-tone text-sm"
+              li_class="flex flex-col relative"
+              a_class="flex hover:text-brand"
+            }}
+          {{/if}}
+        </nav>
+      </div>
+
+      {{!-- Categories --}}
+      {{#if @custom.featured_job_categories}}
+        {{#get "tags" filter="slug:[{{@custom.featured_job_categories}}]" include="count.posts" limit="all"}}
+          {{#if tags}}
+            <div class="flex flex-col gap-2 mt-4" data-footer-nav="categories">
+              <span class="font-semibold">{{t "Categories"}}</span>
+              <nav class="">
+                <ul class="flex flex-col items-start gap-2 text-typogr-tone text-sm">
+                  {{#foreach tags}}
+                    <li class="flex flex-col relative">
+                      <a href="{{url}}" class="flex hover:text-brand">{{name}}</a>
+                    </li>
+                  {{/foreach}}
+                </ul>
+              </nav>
+            </div>
+          {{/if}}
+        {{/get}}
+      {{/if}}
+
+      {{!-- Companies --}}
+      {{#if @custom.featured_companies}}
+        {{#get "tags" filter="slug:[{{@custom.featured_companies}}]" include="count.posts" limit="all"}}
+          {{#if tags}}
+            <div class="flex flex-col gap-2 mt-4" data-footer-nav="companies">
+              <span class="font-semibold">{{t "Companies"}}</span>
+              <nav class="">
+                <ul class="flex flex-col items-start gap-2 text-typogr-tone text-sm">
+                  {{#foreach tags}}
+                    <li class="flex flex-col relative">
+                      <a href="{{url}}" class="flex hover:text-brand">{{name}}</a>
+                    </li>
+                  {{/foreach}}
+                </ul>
+              </nav>
+            </div>
+          {{/if}}
+        {{/get}}
+      {{/if}}
+    </div>
+
+
+    {{!-- Copy & Color scheme --}}
+    <div class="py-4 flex flex-wrap items-center border-t border-border gap-2">
+      <div class="text-sm text-typogr-tone">
+        <span data-footer-date>&copy;{{date format="YYYY"}}&nbsp;{{#link href=@site.url class="hover:underline"}}{{@site.title}}{{/link}}.</span>
+        <span data-footer-ghost>{{t "Published with"}}&nbsp;{{#link href="https://ghost.org" class="hover:underline"}}Ghost{{/link}}</span>
+        <span data-footer-theme>&&nbsp;{{#link href="https://brightthemes.com/themes/lumen" class="hover:underline"}}Lumen{{/link}}.</span>
+      </div>
+
+      {{> select-color-scheme}}
+    </div>
+  </div>
+</footer>

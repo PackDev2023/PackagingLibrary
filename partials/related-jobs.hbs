@@ -1,0 +1,17 @@
+{{#get "posts" include="tags,authors,tiers" limit="6" filter="tags:[{{tag_slugs}}]+id:-{{post.id}}" as |related|}}
+  {{#if related}}
+    <section class="px-4 py-12" data-related="jobs">
+      <div class="max-w-container mx-auto">
+        <h2 class="text-xl md:text-2xl font-semibold mb-4">{{t "Similar jobs"}}</h2>
+
+        <div class="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+          {{#foreach posts}}
+            {{> job-card
+              type="grid"
+            }}
+          {{/foreach}}
+        </div>
+      </div>
+    </section>
+  {{/if}}
+{{/get}}

@@ -1,0 +1,15 @@
+<form class="relative{{#if form_class}} {{form_class}}{{/if}}"
+  data-members-form="{{#if form_type}}{{form_type}}{{else}}subscribe{{/if}}" data-style="{{form_style}}">
+  {{#if name_field}}
+    <input data-members-name autocomplete="name" type="text" placeholder="{{t "Your name"}}" 
+      aria-labelledby="{{#if input_label}}{{input_label}}{{else}}form-input-label{{/if}}" required>
+  {{/if}}
+  <input data-members-email class="{{input_class}}" 
+    type="email" autocomplete="email" placeholder="{{t "Your email address"}}" 
+    aria-labelledby="{{#if input_label}}{{input_label}}{{else}}form-input-label{{/if}}" required/> 
+  <button class="{{button_class}}" type="submit">
+    <span>{{#if button_text}}{{button_text}}{{else}}{{t "Subscribe"}}{{/if}}</span>
+  </button>
+  <p data-msg="success" class="hidden absolute text-sm leading-tight -bottom-[45%] text-success font-medium">{{t "Great! Check your inbox and click the link."}}</p>
+  <p data-msg="error" class="hidden absolute text-sm leading-tight -bottom-[45%] text-error font-medium">{{t "Sorry, something went wrong. Please try again."}}</p>
+</form>

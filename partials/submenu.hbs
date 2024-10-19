@@ -1,0 +1,49 @@
+{{#contentFor "scripts"}}
+  <template data-toggle-template>
+    <button class="ml-0.5" data-class="rotate-180" title="{{t "Menu toggle"}}" aria-label="{{t "Menu toggle"}}"
+      onclick="handleSubmenu(this)"
+    >
+      {{> icon name="chevron-down" icon_class="w-5 h-5 stroke-2"}}
+    </button>
+  </template>
+  <script>
+    function renderSubmenus() {
+      const navItems = document.querySelectorAll('[data-nav] li')
+      const subItems = document.querySelectorAll('.is-subitem')
+      const mobileClass = "{{mobile_class}}"
+      const desktopClass = "{{desktop_class}}"
+
+      // Remove '-' signs
+      subItems.forEach(item => {
+        const itemName = item.querySelector('a span')
+        itemName.innerText = itemName.innerText.slice(1)
+      });
+
+      // Add subitems in place
+      let subMenu, hasItems
+      navItems.forEach((item, index) => {
+        if (item.classList.contains('is-subitem') && !navItems[index - 1].classList.contains('is-subitem')) {
+          navItems[index - 1].classList.add('is-mainitem')
+          navItems[index - 1].setAttribute('x-on:click.outside', 'closeSubmenus(event)')
+        }
+        subMenu = item.classList.contains('is-subitem') ? subMenu : document.createElement('ul')
+        if (item.classList.contains('is-subitem')) { 
+          subMenu.appendChild(item)
+          subMenu.setAttribute('data-submenu', '')
+          const menuType = subMenu.closest('nav').getAttribute('data-nav')
+          subMenu.classList = menuType === 'desktop' ? desktopClass : mobileClass
+        } else { 
+          item.appendChild(subMenu)
+        }
+      });
+
+      const dropdownMenus = document.querySelectorAll('[data-nav] .is-mainitem')
+      const toggle = document.querySelector('[data-toggle-template]');
+
+      dropdownMenus.forEach(menu => { 
+        const toggleBtn = toggle.content.cloneNode(true);
+        menu.insertBefore(toggleBtn, menu.children[1]);
+      });
+    }
+  </script>
+{{/contentFor}}

@@ -1,0 +1,89 @@
+<header class="px-4 text-typogr-tone whitespace-nowrap" data-header x-init="renderSubmenus()">
+  <div class="max-w-container mx-auto py-4 md:py-6 flex items-center gap-4">
+
+    {{!-- Brand --}}
+    <div class="flex-1 flex justify-start">
+      <a class="" href="{{@site.url}}" data-brand>
+        {{> logo loading="eager"}}
+      </a>
+    </div>
+
+    {{!-- Navigation --}}
+    <nav class="hidden lg:flex justify-center" data-nav="desktop">
+      {{navigation 
+        ul_class="flex gap-2"
+        li_class="flex relative hover:bg-backgr-tone rounded-theme"
+        a_class="w-full flex px-3 py-1.5 rounded-theme"
+      }}
+    </nav>
+
+    {{!-- Actions --}}
+    <div class="flex flex-1 gap-2 items-center justify-end">
+
+      {{!-- Search button --}}
+      {{#if @custom.header_search}}
+        <button class="hidden sm:flex items-center justify-center rounded-theme size-8 md:size-9 hover:text-brand" data-ghost-search title="{{t "Search"}}" aria-label="{{t "Search"}}">
+          {{> icon name="search" icon_class="w-5 h-5 stroke-2"}}
+        </button>
+      {{/if}}
+
+      {{!-- Header action: CTA --}}
+      {{#match @custom.header_action "cta"}}
+        {{#if @custom.cta_text}}
+          <a href="{{@custom.cta_link}}" 
+            class="bg-brand text-sm md:text-base font-medium text-brand-contrast px-4 py-2 rounded-theme md:px-5 hover:brightness-110">
+            <span>{{@custom.cta_text}}</span>
+          </a>
+        {{/if}}
+      {{/match}}
+
+      {{!-- Header action: Sign in/Sign up --}}
+      {{#match @custom.header_action "signin-signup"}}
+        {{#if @site.members_enabled}}
+          {{#unless @member}}
+            <a href="/signin/" data-portal="signin"
+              class="hidden sm:block text-sm md:text-base mr-1 px-2 py-1.5 rounded-theme md:px-3 hover:bg-backgr-tone">
+              <span>{{t "Sign in"}}</span>
+            </a>
+            <a href="/signup/" data-portal="signup"
+              class="text-sm md:text-base font-medium bg-brand text-brand-contrast px-4 py-1.5 rounded-theme md:px-5 hover:brightness-110">
+              <span>{{t "Sign up"}}</span>
+            </a>
+          {{/unless}}
+        {{/if}}
+      {{/match}}
+
+      {{!-- Header action: Subscribe --}}
+      {{#match @custom.header_action "subscribe"}}
+        {{#unless @member}}
+          <a href="/subscribe/" data-portal="subscribe"
+            class="bg-brand text-sm md:text-base font-medium text-brand-contrast px-4 py-2 rounded-theme md:px-5 hover:brightness-110">
+            <span>{{t "Subscribe"}}</span>
+          </a>
+        {{/unless}}
+      {{/match}}
+
+      {{!-- Member/User button --}}
+      {{#if @member}}
+        <button class="ml-1 relative size-8 md:size-9 hover:text-brand" data-portal="account" aria-label="{{@member.name}}">
+          <img class="relative size-8 md:size-9 rounded-full" 
+            src="{{@member.avatar_image}}"
+            alt="{{@member.name}}">
+          {{>icon name="user" icon_class="absolute z-[-1] size-7 stroke-[1.5] inset-0.5 md:inset-1"}}
+        </button>
+      {{/if}}
+
+      {{!-- Menu button --}}
+      <button class="flex flex-col gap-1.5 size-8 md:size-9 items-center justify-center rounded-theme group hover:text-brand lg:hidden" 
+        data-menu-toggle aria-label="{{t "Menu toggle"}}" aria-expanded="false" aria-haspopup="true" aria-controls="menu"
+        @click="menuOpen = !menuOpen; event.currentTarget.setAttribute('aria-expanded', menuOpen);"
+      >
+        <span class="relative pointer-events-none w-5 h-0.5 rounded-sm bg-typogr-tone group-hover:bg-brand transition-all"
+          :class="menuOpen ? 'rotate-45 top-1' : 'rotate-0 top-0'"></span>
+        <span class="relative pointer-events-none w-5 h-0.5 rounded-sm bg-typogr-tone group-hover:bg-brand transition-all"
+          :class="menuOpen ? '-rotate-45 -top-1' : ''"></span>
+      </button>
+    </div>
+
+  </div>
+</header>

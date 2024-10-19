@@ -1,0 +1,73 @@
+{{!-- User Theme Handling & Globals --}}
+<script>
+  let preferredTheme = localStorage.getItem('PREFERRED_COLOR_SCHEME') || `{{@custom.color_scheme}}`;
+  document.documentElement.setAttribute('data-color-scheme', preferredTheme);
+
+  let preferredJobsLayout = localStorage.getItem('PREFERRED_JOB_FEED') || `{{@custom.job_feed_layout}}`;
+  document.documentElement.setAttribute('data-job-feed-layout', preferredJobsLayout);
+  
+  // Global values needed
+  const themeGlobal = {
+    siteUrl: '{{@site.url}}',
+    currentPage: parseInt('{{pagination.page}}'),
+    nextPage: parseInt('{{pagination.next}}'),
+    nextPageLink: '',
+    maxPages: parseInt('{{pagination.pages}}'), 
+    lastPage: `{{pagination.page}}` === `{{pagination.pages}}` ? true : false,
+    postsPerPage: parseInt('{{@config.posts_per_page}}'),
+    total: parseInt('{{pagination.total}}'),
+    searchJobsFeaturedFirst: false
+  }
+
+  function hexToRgb(hexColor) {
+    if (hexColor.slice(0, 1) === '#') { hexColor = hexColor.slice(1); }
+    if (hexColor.length === 3) { hexColor = hexColor.split('').map(function (hex) { return hex + hex;}).join(''); }
+    const r = parseInt(hexColor.substr(0,2),16);
+    const g = parseInt(hexColor.substr(2,2),16);
+    const b = parseInt(hexColor.substr(4,2),16);
+
+    return [r,g,b]
+  }
+
+  // Get contrast color;
+  function getColorContrast(hexColor) {
+    const rgb = hexToRgb(hexColor);
+    let yiq = ((rgb[0] * 299) + (rgb[1] * 587) + (rgb[2] * 114)) / 1000;
+    const colorContrast = (yiq >= 128) ? 'hsl(0 0% 0%)' : 'hsl(0 0% 100%)';
+
+    // return
+    return colorContrast
+  };
+
+  function hexToHsl(hexColor) {
+    const rgb = hexToRgb(hexColor);
+
+    // Make r, g, and b fractions of 1
+    const r = rgb[0]/255;
+    const g = rgb[1]/255;
+    const b = rgb[2]/255;
+
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h, s, l = (max + min)  /  2;  
+    if ( max == min ) { h = s = 0; } else {
+      let d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch(max){
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        case b: h = (r - g) / d + 4; break;
+      }
+      h /= 6;
+    }
+
+    return [Math.round(h * 360),Math.round(s * 100),Math.round(l * 100)]
+  }
+
+  function setBrandHSL(hex) {
+    const colorHsl = hexToHsl(hex)
+    document.documentElement.style.setProperty('--color-brand-hsl', `${colorHsl[0]} ${colorHsl[1]}% ${colorHsl[2]}%`);
+    document.documentElement.style.setProperty('--color-brand-contrast', getColorContrast(hex));
+  }
+
+  setBrandHSL("{{@site.accent_color}}");
+</script>

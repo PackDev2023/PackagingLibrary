@@ -1,0 +1,11 @@
+{{!< default}}
+
+{{#page}}
+  {{!-- Hero section --}}
+  {{> page-hero}}
+  
+  {{!-- Content --}}
+  <article class="pt-16 ghost-content prose md:prose-lg prose-theme"{{#unless access}} data-preview{{/unless}}>
+    {{content}}
+  </article>
+{{/page}}

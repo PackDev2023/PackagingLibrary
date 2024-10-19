@@ -1,0 +1,41 @@
+{{!-- Post share --}}
+<div class="{{share_class}}" data-share {{#if toggle}}:class="shareOpen ? 'block' : 'hidden'" id="share"{{/if}}>
+  {{#if show_title}}
+    <span class="text-base flex-1 basis-full sm:basis-auto text-center sm:text-left">{{t "Share"}}</span>
+  {{/if}}
+  {{!-- twitter --}}
+  <a class="{{item_class}}" target="_blank"
+      href="https://twitter.com/share?text={{encode title}}&amp;url={{url absolute='true'}}"
+      title="{{t "Share on"}} Twitter" aria-label="{{t "Tweet"}}">
+    {{>icon name="twitter-x" icon_class=icon_class}}
+    <span class="{{item_text_class}}">{{t "Tweet"}}</span>
+  </a>
+  {{!-- facebook --}}
+  <a class="{{item_class}}" target="_blank"
+      href="https://www.facebook.com/sharer.php?u={{url absolute='true'}}"
+      title="{{t "Share on"}} Facebook" aria-label="{{t "Share"}}">
+    {{>icon name="facebook" icon_class=icon_class}}
+    <span class="{{item_text_class}}">{{t "Share"}}</span>
+  </a>
+  {{!-- Linkedin --}}
+  <a class="{{item_class}}" target="_blank"
+      href="https://www.linkedin.com/shareArticle?mini=true&url={{url absolute='true'}}&title={{encode title}}&summary={{encode title}}"
+      title="{{t "Share on"}} Linkedin" aria-label="{{t "Share"}}">
+    {{>icon name="linkedin" icon_class=icon_class}}
+    <span class="{{item_text_class}}">{{t "Share"}}</span>
+  </a>
+  {{!-- Mail --}}
+  <a class="{{item_class}}" data-share-mail
+      href="mailto:?subject={{encode title}}&body={{url absolute='true'}}&nbsp;{{encode title}}"
+      title="{{t "Share by email"}}" aria-label="{{t "Email"}}">
+    {{>icon name="mail" icon_class=icon_class}}
+    <span class="{{item_text_class}}">{{t "Email"}}</span>
+  </a>
+  {{!-- Copy to clipboard --}}
+  <button class="{{item_class}}" data-share-copy data-url="{{url absolute='true'}}"
+      title="{{t "Copy URL"}}" data-label="{{t "Copy"}}" data-success="{{t "Copied!"}}" aria-label="{{t "Copy"}}" data-class="text-success !border-success"
+      @click="copyURL(event.currentTarget, event.currentTarget.getAttribute('data-url'))">
+    {{>icon name="link" icon_class=icon_class}}
+    <span class="{{item_text_class}}">{{t "Copy"}}</span>
+  </button>
+</div>

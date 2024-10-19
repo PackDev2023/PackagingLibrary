@@ -1,0 +1,58 @@
+<article class="{{post_class}} {{card_class}} relative flex flex-col gap-4" data-blog-card>
+  
+  {{!-- Feature Image --}}
+  {{#if feature_image}}
+    {{#link href=url class="block bg-backgr-tone aspect-[16/9]"}}
+      <figure class="rounded-theme">
+        {{> image
+          image_type="post"
+          image_class="aspect-[16/9] object-cover w-full h-auto rounded-theme"
+          image_url=feature_image
+          size_s=true
+          size_m=true
+          size_l=true
+          sizes="(max-width: 400px) 300px, 600px"
+          loading=image_loading
+        }}
+      </figure>
+    {{/link}}
+  {{/if}}
+
+  {{!-- Title --}}
+  <h3 class="text-lg md:text-xl font-semibold hover:text-brand">
+    <a href="{{url}}" class="">{{title}}</a>
+  </h3>
+
+  {{!-- Excerpt --}}
+  <p class="text-typogr-tone font-light">{{excerpt words="20"}}</p>
+
+  {{!-- Author and date --}}
+  <div class="flex gap-2 text-typogr-tone">
+    {{#foreach authors limit="1"}}
+      {{#if profile_image}}
+        <a href="{{url}}">
+          {{> image
+            image_type="author"
+            image_class="lazyload size-9 object-cover rounded-full"
+            image_url=profile_image
+            size_xxs=true
+            size_xs=true
+            sizes="36px"
+          }}
+        </a>
+      {{/if}}
+    {{/foreach}}
+    <div class="flex flex-col justify-center items-start text-sm gap-1">
+      {{#foreach authors limit="1"}}
+        <a href="{{url}}" class="leading-none font-medium hover:text-brand">{{name}}</a>
+      {{/foreach}}
+      <div class="flex gap-2 leading-none">
+        <time class="" datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time> 
+        {{#if reading_time}}
+          <span class="">·</span>
+          <span class="">{{reading_time minute=(t '1 min read') minutes=(t '% min read')}}</span>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</article>

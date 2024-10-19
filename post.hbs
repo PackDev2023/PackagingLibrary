@@ -1,0 +1,38 @@
+{{!< default}}
+
+{{#post}}
+  {{!-- Hero section --}}
+  {{> job-hero }}
+
+  {{!-- Content --}}
+  <article class="pt-16 ghost-content prose md:prose-lg prose-theme"{{#unless access}} data-preview{{/unless}}>
+    {{content}}
+  </article>
+
+  {{!-- Share --}}
+  <div class="px-4">
+    {{> social-share
+      share_class="mb-12 pt-4 border-t border-border text-typogr text-sm font-medium max-w-content mx-auto flex gap-3 md:gap-4 justify-center flex-wrap items-center"
+      item_class="border border-border leading-tight p-1.5 flex-1 flex gap-1.5 items-center justify-center rounded-theme bg-backgr hover:bg-backgr-tone"
+      item_text_class=""
+      icon_class="size-4"
+      show_title=true
+    }}
+  </div>
+
+  {{!-- Comments --}}
+  {{!-- {{> comments}} --}}
+{{/post}}
+
+{{!-- Related jobs --}}
+{{#if post.primary_tag}}  
+  {{#match post.tags.length ">=" 2}}
+    {{> related-jobs
+      tag_slugs=(concat post.tags.[0].slug "," post.tags.[1].slug)
+    }}
+  {{else}}
+    {{> related-jobs
+      tag_slugs=post.tags.[0].slug
+    }}
+  {{/match}}
+{{/if}}

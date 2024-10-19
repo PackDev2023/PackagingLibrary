@@ -1,0 +1,23 @@
+<a href="{{url}}" class="h-full flex flex-col gap-2 rounded-theme bg-backgr border border-border p-4 lg:p-5 hover:border-accent hover:ring-1 hover:ring-accent" {{#if accent_color}}style="--color-accent:{{accent_color}}"{{/if}} data-category-card>
+  {{#if feature_image}}
+    <figure class="self-start rounded-full mb-1">
+      {{> image
+        picture_class=""
+        image_type="tag"
+        image_class=logo_class
+        image_url=feature_image
+        size_xs=true
+        size_s=true
+        sizes="48px"
+      }}
+    </figure>
+  {{/if}}
+  <h3 class="text-base md:text-lg font-medium{{#unless show_description}} flex-1{{/unless}}">{{name}}</h3>
+  {{#if show_description}}
+    <p class="text-typogr-tone font-light flex-1 text-sm mb-2">{{description}}</p>
+  {{/if}}
+  <p class="text-typogr-tone text-sm{{#if show_description}} self-start border border-border px-2 py-0.5 rounded-theme-sm font-medium{{/if}}">
+    {{plural count.posts empty=(t 'No open positions') singular=(t '1 open position') plural=(t '% open positions')}}
+    {{pagination.total}}
+  </p>
+</a>

@@ -1,0 +1,24 @@
+{{#page}}
+  <div class="grid gap-4 md:gap-6" data-job-feed=""> 
+    {{#foreach ../posts}}
+      {{> job-card
+        featured_class="ring-1 ring-brand border-brand"
+      }}
+    {{/foreach}}
+  </div>
+  {{#unless access}}
+    <div class="absolute mt-12 pt-20 w-[calc(100%_+_8px)] h-[calc(100%_+_8px)] left-[-4px] top-[-4px] backdrop-blur-[6px]">
+      <div class="max-w-[36rem] mx-auto">
+        {{content}}      
+      </div>
+    </div>
+  {{/unless}}
+{{else}}
+  <div class="grid gap-4 md:gap-6" data-job-feed=""> 
+    {{#foreach posts}}
+      {{> job-card
+        featured_class="ring-1 ring-brand border-brand"
+      }}
+    {{/foreach}}
+  </div>
+{{/page}}

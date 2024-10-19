@@ -1,0 +1,85 @@
+<section class="px-4 py-16 bg-backgr-tone min-h-[30vh]" data-post-hero="job" x-data="{ shareOpen: false }" >
+  <div class="max-w-[720px] mx-auto relative border border-border bg-backgr p-6 lg:p-8 rounded-theme-md flex items-center flex-col gap-4 sm:gap-6 sm:flex-row">
+
+    {{#if feature_image}}
+      <figure class="self-start">
+        {{> image
+          image_type="post"
+          image_class="rounded-full transition-all aspect-1/1 size-20 lg:size-24"
+          image_url=feature_image
+          size_xs=true
+          size_s=true
+          sizes="160px"
+          loading="eager"
+        }}
+      </figure>
+    {{/if}}
+    
+    <div class="flex flex-1 flex-col gap-3 md:gap-4">
+      <h1 class="text-xl md:text-2xl lg:text-3xl leading-tight md:leading-tight lg:leading-tight font-semibold">
+        {{title}}
+      </h1>
+      
+      {{#if custom_excerpt}}
+        <p class="flex-1 max-w-xl text-base md:text-lg text-typogr-tone font-light leading-snug md:leading-snug">{{custom_excerpt}}</p>
+      {{/if}}
+
+      <div class="relative flex items-center gap-2 text-sm font-medium text-typogr-tone">
+        <time class="flex items-center gap-1.5 leading-none" datetime="{{date format="YYYY-MM-DD"}}">
+          {{date timeago=""}}
+        </time> 
+
+        <span class="flex-1"></span>
+
+        {{#if canonical_url}}
+          <a href="{{canonical_url}}" class="flex items-center gap-1 px-3 pr-2.5 py-1 border border-brand bg-brand text-brand-contrast rounded-theme hover:brightness-110">
+            {{t "Apply now"}}
+            {{> icon name="arrow-up-right" icon_class="size-4 stroke-[2.5]"}}
+          </a>
+        {{/if}}
+        
+        <button class="flex items-center gap-1.5 px-2.5 py-1 border border-border bg-backgr rounded-theme hover:bg-backgr-tone hover:text-brand"
+          aria-expanded="false" aria-haspopup="true" aria-controls="menu" @click="shareOpen = !shareOpen; event.currentTarget.setAttribute('aria-expanded', shareOpen);"
+        >
+          {{> icon name="share" icon_class="size-4 stroke-[2.5]"}}
+          <span>{{t "Share job"}}</span>
+        </button>
+
+        {{> social-share
+          share_class="z-[10] border border-border text-typogr-tone bg-backgr-tone rounded-theme text-sm font-medium p-1.5 max-w-content mx-auto flex gap-1.5 justify-center flex-wrap items-center absolute right-0 top-9"
+          item_class="border border-border leading-tight p-1.5 flex-1 flex items-center rounded-theme-sm bg-backgr hover:bg-backgr-tone"
+          item_text_class="sr-only"
+          icon_class="size-4"
+          toggle=true
+        }}
+      </div>
+      
+      {{#if tags}}
+        <ul class="border-t border-border pt-4 flex flex-wrap gap-2 text-typogr-tone text-sm font-medium" data-job-hero-tags>
+          {{#foreach tags}}
+            <li class="flex items-center">
+              <a href="{{url}}" class="h-5 flex items-center gap-1 hover:opacity-90">
+                {{#if feature_image}}
+                  {{> image
+                    image_type="tag"
+                    image_class="size-5"
+                    image_alt=" "
+                    image_url=feature_image
+                    size_xs=true
+                    size_s=true
+                    size_m=true
+                    sizes="24px"
+                    loading="eager"
+                  }}
+                {{/if}}
+                <span>{{name}}</span>
+              </a>
+              {{#unless @last}}<span class="ml-2 opacity-25">/</span>{{/unless}}
+            </li>
+          {{/foreach}}
+        </ul>
+      {{/if}}
+    </div>
+    
+  </div>
+</section>

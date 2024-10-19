@@ -1,0 +1,13 @@
+{{#get "posts" include="tags,authors,tiers" limit="3" filter="tags:[{{post.tags}}]+id:-{{post.id}}" as |related|}}
+  {{#if related}}
+    <section class="px-4 py-12 max-w-container mx-auto" data-related="posts">
+      <h2 class="text-xl md:text-2xl font-semibold mb-4">{{t "Read next"}}</h2>
+
+      <div class="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
+        {{#foreach posts}}
+          {{> blog-card}}
+        {{/foreach}}
+      </div>
+    </section>
+  {{/if}}
+{{/get}}

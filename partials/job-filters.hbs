@@ -1,0 +1,74 @@
+{{#if @custom.job_filter_slugs}}
+  <aside class="text-typogr min-w-40 lg:min-w-48 xl:min-w-52 md:max-w-52" x-data="{ filtersOpen: false }"> 
+    {{!-- Filter title & clear function --}}
+    <div class="flex items-end h-10 gap-4 border-b border-border pb-2">
+      <h2 class="flex-1 text-base font-semibold">{{t "Filters"}}</h2>
+      <button class="hidden flex items-center gap-1 text-sm font-medium text-rose-600 hover:brightness-110 rounded-theme" 
+        data-filter-clear @click="location.reload()"
+      >
+        <span>{{t "Clear filters"}}</span>
+      </button>
+      <button class="sm:hidden" @click="filtersOpen = !filtersOpen;" 
+        :class="filtersOpen ? 'rotate-180' : ''" aria-label="{{t "Toggle filters"}}">
+        {{> icon name="chevron-down"}}
+      </button>
+    </div>
+
+    <div class="sm:block" :class="filtersOpen ? 'block' : 'hidden'">
+
+      {{!-- Filter from pages --}}
+      {{#match @custom.job_filter_slugs_source "pages"}}
+        {{#get "pages" filter="slug:[{{@custom.job_filter_slugs}}]" include="tags" limit="all"}}
+          {{#if pages}}
+            {{#foreach pages}}
+              <div class="py-3 border-b border-border text-sm font-medium">
+                <span class="block opacity-60 mb-2">{{title}}</span>
+                <ul class="flex flex-col gap-1.5" data-filter-group="{{slug}}">
+                  {{#foreach tags}}
+                    <li class="flex gap-2 items-center">
+                      <input id="{{slug}}" type="checkbox" value="{{slug}}" {{#match codeinjection_foot "<span data-checked></span>"}}checked{{/match}}
+                        class="size-4 rounded bg-backgr border-border text-brand transition-all focus:ring-offset-backgr hover:ring-2 focus:ring-2 hover:ring-brand focus:ring-brand hover:ring-opacity-20">
+                      <label class="opacity-80" for="{{slug}}">{{name}}</label>
+                    </li>
+                  {{/foreach}}
+                </ul>
+              </div>
+            {{/foreach}}
+          {{/if}}
+        {{/get}}
+      {{/match}}
+
+      {{!-- Filter from tags --}}
+      {{#match @custom.job_filter_slugs_source "tags"}}
+        {{#get "tags" filter="slug:[{{@custom.job_filter_slugs}}]" limit="all"}}
+          {{#if tags}}
+            <ul class="flex flex-col gap-1.5 pt-3 text-sm font-medium" data-filter-group="tags">
+              {{#foreach tags}}
+                <li class="flex gap-2 items-center">
+                  <input id="{{slug}}" type="checkbox" value="{{slug}}" {{#match codeinjection_foot "<span data-checked></span>"}}checked{{/match}}
+                    class="size-4 rounded bg-backgr border-border text-brand transition-all focus:ring-offset-backgr hover:ring-2 focus:ring-2 hover:ring-brand focus:ring-brand hover:ring-opacity-20">
+                  <label class="opacity-80" for="{{slug}}">{{name}}</label>
+                </li>
+              {{/foreach}}
+            </ul>
+          {{/if}}
+        {{/get}}
+      {{/match}}
+
+      {{!-- Submit --}}
+      <button class="flex gap-2 min-w-full min-h-8 items-center justify-center mt-4 text-sm self-start mb-4 px-6 py-2 bg-brand text-brand-contrast font-medium md:px-8 md:py-2.5 rounded-theme hover:brightness-110" 
+        @click="submitFilters(event)" data-filter-submit>
+        <span>{{t "Search"}}</span>
+        {{> icon name="loader" icon_class="hidden w-5 h-5 animate-spin" icon_stroke_width="stroke-[2.5]"}}
+      </button>
+
+      {{!-- Error when no filter is selected --}}
+      <p class="hidden flex items-center rounded-theme bg-rose-50 px-3 py-2" data-alert="filter-error">
+        {{> icon name="info-circle-filled" icon_class="text-rose-600 w-5 h-5"}}
+        <span class="ml-2 flex-1 leading-tight text-sm text-rose-600 font-medium">
+          {{t "No filters selected"}}
+        </span>
+      </p>
+    </div>
+  </aside>
+{{/if}}

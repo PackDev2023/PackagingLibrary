@@ -1,0 +1,29 @@
+<template data-template="job-card" data-job-card-template>
+  <article class="post relative flex border border-border rounded-theme p-5 md:p-6 transition hover:shadow-lg flex-col gap-3" 
+    data-job-card data-featured-class="{{featured_class}}">
+    <a class="self-start hidden" href="" data-template-url data-template-media>      
+      <figure class="">
+        <img class="rounded-full transition-all aspect-1/1 size-14" 
+          src="" alt="" data-template-img>
+      </figure>
+    </a>
+      
+    <time class="flex gap-1 items-center text-sm text-typogr-tone font-semibold absolute right-5 md:right-6 top-5 md:top-6" datetime="" data-template-date>
+    </time> 
+    
+    <div class="flex flex-1 flex-col gap-2">
+      <h3 class="text-base md:text-lg leading-tight md:leading-tight font-semibold lg:text-xl">
+        <a href="" class="hover:text-brand" data-template-url data-template-title></a>
+      </h3>
+      
+      <p class="flex-1 max-w-xl text-sm md:text-base text-typogr-tone font-light leading-snug" data-template-excerpt>
+      </p>
+      
+      <ul class="mt-2 flex flex-wrap gap-1.5 text-typogr-tone text-sm font-medium" data-template-tags="{{@custom.job_card_tags_limit}}">
+        <li class="">
+          <a href="" class="block px-2 py-0.5 border border-border rounded-theme-sm hover:bg-backgr-tone hover:text-accent"></a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</template>

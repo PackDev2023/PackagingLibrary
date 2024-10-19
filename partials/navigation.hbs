@@ -1,0 +1,11 @@
+<ul class="{{ul_class}}">
+  {{#foreach navigation}}
+    <li class="{{link_class for=(url) class=(concat "nav-" slug)}} {{../li_class}}{{#match label.[0] "-"}} is-subitem{{/match}}{{#match url "#"}} is-toggle{{/match}}{{#match url "#"}} nav-toggle{{/match}}" 
+      data-label="{{label}}" data-slug="{{slug}}" data-length="{{label.length}}">
+      <a class="{{../a_class}}" href="{{url absolute="true"}}" 
+        {{#match url "#"}}onclick="handleSubmenu(this);return false;"{{/match}}>
+        <span>{{label}}</span>
+      </a>
+    </li>
+  {{/foreach}}
+</ul>

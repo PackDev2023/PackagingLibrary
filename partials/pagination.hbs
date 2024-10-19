@@ -1,0 +1,11 @@
+<nav class="my-12 flex items-center justify-center gap-4 font-medium sm:font-normal text-sm sm:gap-6 sm:text-base {{main_class}}" data-pagination>
+  <a data-prev class="text-sm font-medium flex items-center gap-0.5 border border-border rounded-theme px-3 py-1.5 sm:px-4 hover:bg-backgr-tone{{#unless pagination.prev}} cursor-not-allowed disabled{{/unless}}" 
+    href="{{#if pagination.prev}}{{page_url pagination.prev}}{{else}}javascript:{{/if}}">
+    {{> icon name="arrow-left" icon_class="w-5 h-5 stroke-2 -ml-1"}}<span>{{t "Prev"}}</span>
+  </a>
+  <span data-page-number class="">{{t "Page {current_page} of {total_pages}" current_page=pagination.page total_pages=pagination.pages}}</span>
+  <a data-next class="text-sm font-medium flex items-center gap-0.5 border border-border rounded-theme px-3 py-1.5 sm:px-4 hover:bg-backgr-tone{{#unless pagination.next}} cursor-not-allowed disabled{{/unless}}" 
+    href="{{#if pagination.next}}{{page_url pagination.next}}{{else}}javascript:{{/if}}">
+    <span>{{t "Next"}}</span>{{> icon name="arrow-right" icon_class="h-5 w-5 stroke-2 -mr-1"}}
+  </a>
+</nav>
