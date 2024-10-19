@@ -1,0 +1,54 @@
+{{!< default}}
+
+{{#page}}
+  {{> page-hero}}
+{{else}}
+  <section class="px-4 bg-backgr-tone">
+    <div class="max-w-2xl mx-auto py-16 min-h-[30vh] flex flex-col gap-4 md:gap-6 items-center justify-center text-center">
+      <h1 class="font-semibold tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl">{{t "Search jobs"}}</h1>
+    </div>
+  </section>
+{{/page}}
+
+<section class="px-4 mb-16">
+  <div class="max-w-container mx-auto pt-12 flex flex-col gap-8 sm:flex-row lg:gap-12">
+    {{!-- Filters --}}
+    {{> job-filters}}
+
+    {{!-- Job results & feed --}}
+    <div class="relative flex-1">
+      <div class="flex items-end h-10 gap-4 border-b border-border pb-2 mb-6">
+        <h2 class="flex-1 text-base font-semibold" data-filter-result>
+          <span class="">{{t "Showing"}}</span>
+          <span class="" x-text="themeGlobal.currentPage > 1 ? themeGlobal.currentPage * themeGlobal.postsPerPage - themeGlobal.postsPerPage + 1 : {{posts.length}} == 0 ? 0 : 1"></span> 
+          <span class="before:content-['-_']" x-text="themeGlobal.currentPage * themeGlobal.postsPerPage > themeGlobal.total ? themeGlobal.total : themeGlobal.currentPage * themeGlobal.postsPerPage"></span> 
+          <span class="">{{t "of"}}</span>
+          <span class="">{{pagination.total}}</span>
+          <span class="">{{t "jobs"}}</span>
+        </h2>
+
+        <div class="flex bg-backgr-tone border border-border rounded-theme p-0.5 text-typogr-tone">
+          <button class="rounded-theme-sm border border-transparent p-1.5 hover:text-brand"
+            @click="changeJobFeedLayout('grid')" data-feed-toggle="grid" aria-label="{{t "Feed layout grid"}}"
+          >
+            {{> icon name="layout-grid" icon_class="size-[18px]"}}
+          </button>
+          <button class="rounded-theme-sm border border-transparent p-1.5 hover:text-brand"
+            @click="changeJobFeedLayout('list')" data-feed-toggle="list" aria-label="{{t "Feed layout list"}}"
+          >
+            {{> icon name="layout-list" icon_class="size-[18px]"}}
+          </button>
+        </div>
+      </div>
+      
+      {{!-- Feed and pagination --}}
+      {{> job-feed}}
+      
+      {{> pagination}}
+    </div>
+  </div>
+</section>
+
+{{> job-card-template
+  featured_class="ring-1 ring-brand border-brand"
+}}

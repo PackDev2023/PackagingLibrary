@@ -1,0 +1,134 @@
+{{!< default}}
+
+{{!-- Hero section --}}
+{{> hero}}
+
+{{!-- Partners: based on the /partners/ page --}}
+{{#get "pages" filter="slug:partners" limit="1"}}
+  {{#foreach pages}}
+    <section class="px-4 mb-16" data-partners>
+      <div class="max-w-container mx-auto">
+        <h2 class="text-center opacity-75 mb-6 font-medium">{{title}}</h2>
+        <div class="flex flex-wrap gap-6 md:gap-8 items-center justify-center" 
+          data-partners-logos>
+          {{content}}
+        </div>
+      </div>
+    </section>
+  {{/foreach}}
+{{/get}}
+
+{{!-- Job categories --}}
+{{#if @custom.featured_job_categories}}
+  {{#get "tags" filter="slug:[{{@custom.featured_job_categories}}]" include="count.posts" limit="all"}}
+    {{#if tags}}
+      <section class="px-4 mb-16 bg-backgr-tone py-12" data-featured-job-categories>
+        <div class="max-w-container mx-auto">
+          <h2 class="text-xl md:text-2xl font-semibold mb-4">{{t "Browse by category"}}</h2>
+          <ul class="grid  gap-3 grid-cols-2 sm:grid-cols-3 md:gap-4 md:grid-cols-4 lg:grid-cols-5">
+            {{#foreach tags}}
+              <li class="">
+                {{> job-category
+                  logo_class="size-10 object-cover aspect-1/1 rounded-theme"
+                }}
+              </li>
+            {{/foreach}}
+          </ul>
+        </div>
+      </section>
+    {{/if}}
+  {{/get}}
+{{/if}}
+
+{{!-- Featured jobs --}}
+{{#match @custom.featured_job_posts "!=" "none"}}
+  {{#get "posts" filter="tags:-[blog]+featured:true" include="tags,authors" limit=@custom.featured_job_posts}}
+    {{#if posts}}
+      <section class="px-4 mb-16" data-featured-jobs>
+        <div class="max-w-container mx-auto">
+          <div class="flex items-center mb-4 justify-between">
+            <h2 class="text-xl md:text-2xl font-semibold">{{t "Featured job posts"}}</h2>
+            <a href="/jobs/"
+              class="font-medium text-sm border border-border rounded-theme flex items-center gap-0.5 px-2 pl-3 py-1.5 hover:text-brand hover:bg-backgr-tone" 
+            >
+              {{t "See all jobs"}}
+              {{> icon name="chevron-right" icon_class="w-4 h-4" stroke_width="stroke-[2.5]"}}
+            </a>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+            {{#foreach posts}}
+              {{> job-card
+                card_class="md:p-8"
+                date_class="md:right-8 md:top-8"
+              }}
+            {{/foreach}}
+          </div>
+        </div>
+      </section>
+    {{/if}}
+  {{/get}}
+{{/match}}
+
+{{!-- Featured companies --}}
+{{#if @custom.featured_companies}}
+  {{#get "tags" filter="slug:[{{@custom.featured_companies}}]" include="count.posts" limit="all"}}
+    {{#if tags}}
+      <section class="px-4 mb-16 bg-backgr-tone py-12" data-featured-companies>
+        <div class="max-w-container mx-auto">
+          <h2 class="text-xl md:text-2xl font-semibold mb-4">{{t "Browse by company"}}</h2>
+          <ul class="grid gap-4 sm:grid-cols-2 md:gap-6 md:grid-cols-3 lg:grid-cols-4">
+            {{#foreach tags}}
+              <li class="">
+                {{> job-category
+                  show_description=true
+                  logo_class="size-12 object-cover aspect-1/1 rounded-full"
+                }}
+              </li>
+            {{/foreach}}
+          </ul>
+        </div>
+      </section>
+    {{/if}}
+  {{/get}}
+{{/if}}
+
+{{!-- FAQ section --}}
+{{#get "pages" filter="slug:faq" limit="1"}}
+  {{#foreach pages}}
+    <section class="px-4 mb-16" data-faq>
+      <div class="max-w-container mx-auto flex flex-col gap-8 md:flex-row lg:gap-12">
+        <div class="flex-1">
+          <h2 class="text-xl md:text-2xl font-semibold mb-4">{{title}}</h2>
+          <p class="md:text-lg text-typogr-tone">{{excerpt}}</p>
+        </div>
+        <article class="flex-1 lg:flex-[2] prose md:prose-lg prose-theme"{{#unless access}} data-preview{{/unless}}>
+          {{content}}
+        </article>
+      </div>
+    </section>
+  {{/foreach}}
+{{/get}}
+
+{{!-- Blog --}}
+{{#get "posts" filter="tag:blog" include="tags,authors" limit="3"}}
+  {{#if posts}}
+    <section class="px-4 mb-16" data-blog>
+      <div class="max-w-container mx-auto">
+        <div class="flex items-center mb-4 justify-between">
+          <h2 class="text-xl md:text-2xl font-semibold">{{t "From the blog"}}</h2>
+          <a href="/blog/"
+            class="font-medium text-sm border border-border rounded-theme flex items-center gap-0.5 px-2 pl-3 py-1.5 hover:text-brand hover:bg-backgr-tone" 
+          >
+            {{t "View all posts"}}
+            {{> icon name="chevron-right" icon_class="w-4 h-4" stroke_width="stroke-[2.5]"}}
+          </a>
+        </div>
+        <div class="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
+          {{#foreach posts}}
+            {{> blog-card}}
+          {{/foreach}}
+        </div>
+      </div>
+    </section>
+  {{/if}}
+{{/get}}

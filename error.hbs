@@ -1,0 +1,20 @@
+{{!< default}}
+
+<section class="max-w-container mx-auto px-4 py-16 flex flex-col items-center justify-center text-center">
+  <h1 class="text-7xl tracking-tight font-bold lg:text-9xl">{{statusCode}}</h1>
+  
+  <h2 class="mb-8 text-3xl tracking-tight font-semibold text-typogr md:text-4xl">{{message}}</h2>
+  
+  {{#match statusCode 404}}
+    <p class="mb-8 text-lg font-light text-typogr">
+      {{t "Something went wrong! We can't seem to find the page you are looking for."}}
+    </p>
+  {{/match}}
+
+  <div class="flex gap-2">
+    {{#link href="javascript:history.back()" class="border-2 border-border rounded-theme px-3 py-1 sm:px-4 hover:border-typogr"}}{{t "Go back"}}{{/link}}
+    {{#link href=@site.url class="border-2 border-border rounded-theme px-3 py-1 sm:px-4 hover:border-typogr"}}{{t "Home"}}{{/link}}
+  </div>
+</section>
+
+<style>[data-newsletter] { display: none; }</style>

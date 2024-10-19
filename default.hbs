@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}" data-color-scheme="{{@custom.color_scheme}}" data-job-feed-layout="{{@custom.job_feed_layout}}">
+  <head>
+    {{!-- Document Settings --}}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    {{!-- Page Meta --}}
+    <title>{{meta_title}}</title>
+
+    {{!-- Mobile Meta --}}
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    {{!-- Theme color --}}
+    <meta name="theme-color" content="{{@site.accent_color}}">
+
+    {{!-- Font definitions --}}
+    {{> fonts}}
+
+    {{!-- Main theme scripts --}}
+    <script type="module" src="{{asset 'built/app.js'}}"></script>
+
+    {{!-- Styles --}}
+    <link rel="stylesheet" type="text/css" href="{{asset 'built/app.css'}}" />
+
+    {{!-- Theme configs --}}
+    {{> config}}
+
+    {{!-- Ghost outputs important style and meta data with this tag --}}
+    {{ghost_head}}
+  </head>
+  <body class="{{body_class}} subpixel-antialiased relative overflow-x-hidden bg-backgr text-typogr"
+    x-data="{ menuOpen: false }" :class="menuOpen ? 'overflow-hidden' : 'overflow-y-auto'"
+    data-user="{{#if @member.paid}}paid-member{{else if @member}}free-member{{else}}visitor{{/if}}"
+    @keydown.escape="menuOpen = false" @keydown.cmk.k="document.querySelector('[data-ghost-search]').click()"
+  >
+    {{!-- Header --}}
+    {{> header}}
+
+    {{!-- Menu --}}
+    {{> mobile-menu}}
+    {{> submenu
+      desktop_class="z-[50] min-w-[calc(100%_+_16px)] absolute flex flex-col shadow-2xl border border-border rounded-theme bg-backgr py-2 px-1.5 -ml-2 mt-10 opacity-0 invisible translate-y-1 transition-all"
+      mobile_class="hidden pl-4 flex flex-col py-1 px-1.5 basis-full"
+    }}
+
+    {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
+    <main class="main">
+      {{{body}}}
+    </main>
+
+    {{!-- Newsletter --}}
+    {{> newsletter}}
+
+    {{!-- Footer --}}
+    {{> footer}}
+
+    {{!-- Block for scripts --}}
+    {{{block "scripts"}}}
+
+    {{!-- Ghost outputs important scripts and data with this tag --}}
+    {{ghost_foot}}
+  </body>
+</html>
