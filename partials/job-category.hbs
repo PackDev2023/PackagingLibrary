@@ -17,7 +17,7 @@
     <p class="text-typogr-tone font-light flex-1 text-sm mb-2">{{description}}</p>
   {{/if}}
   <p class="text-typogr-tone text-sm{{#if show_description}} self-start border border-border px-2 py-0.5 rounded-theme-sm font-medium{{/if}}">
-    {{plural count.posts empty=(t 'No designs') singular=(t '1 design') plural=(t '% open positions')}}
+    {{plural count.posts empty=(t 'No designs') singular=(t '1 design') plural=(t '% designs')}}
     {{pagination.total}}
   </p>
 </a>
