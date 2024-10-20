@@ -1,20 +1,6 @@
 {{!< default}}
 
-{{!-- Hero --}}
-<section class="px-4 bg-backgr-tone">
-  <div class="max-w-2xl mx-auto py-16 min-h-[30vh] flex flex-col gap-4 md:gap-6 items-center justify-center text-center">
-    <h1 class="font-semibold tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
-      {{#if tag.name}}
-        {{tag.name}}
-      {{else}}
-        {{t "Blog"}}
-      {{/if}}
-    </h1>
-    {{#if tag.description}}
-      <p class="font-light text-lg md:text-xl text-typogr-tone">{{tag.description}}</p>
-    {{/if}}
-  </div>
-</section>
+
 
 {{!-- Blog posts --}}
 <section class="px-4 mb-16" data-blog>
