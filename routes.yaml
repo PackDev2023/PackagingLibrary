@@ -6,10 +6,10 @@ routes:
 
 collections:
   # jobs collection
-  /designs/:
+  /database/:
     permalink: /{slug}/
     template: jobs
-    data: page.designs
+    data: page.database
     filter: tags:-[blog]
     # order: featured desc, published_at desc
 
